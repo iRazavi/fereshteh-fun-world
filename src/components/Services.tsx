@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { PartyPopper, Toys, Image, Lollipop, Dog, Gift } from 'lucide-react';
+import { PartyPopper, Baby, Image, Lollipop, Dog, Gift } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const ServiceCard = ({ 
@@ -48,7 +48,7 @@ const Services = () => {
       color: 'bg-kid-green'
     },
     {
-      icon: Toys,
+      icon: Baby,
       title: 'گیم‌نت',
       description: 'بازی‌های رایانه‌ای مناسب سن کودکان با نظارت مربیان',
       color: 'bg-kid-purple'

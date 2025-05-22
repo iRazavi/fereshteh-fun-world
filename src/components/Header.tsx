@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Baby, Toys, PartyPopper } from 'lucide-react';
+import { Baby, Gift, PartyPopper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -11,7 +11,7 @@ const Header = () => {
     <header className="bg-white shadow-md py-4 relative z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Toys className="h-8 w-8 text-kid-purple" />
+          <Baby className="h-8 w-8 text-kid-purple" />
           <h1 className="text-2xl md:text-3xl font-bold text-kid-purple">شهربازی فرشته</h1>
         </div>
         

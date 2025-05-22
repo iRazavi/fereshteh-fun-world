@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Toys } from 'lucide-react';
+import { Baby } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-6 md:mb-0">
-            <Toys className="h-8 w-8 text-kid-purple mr-2" />
+            <Baby className="h-8 w-8 text-kid-purple mr-2" />
             <h3 className="text-2xl font-bold text-kid-purple">شهربازی فرشته</h3>
           </div>
           
