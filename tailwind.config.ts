@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				bubblegum: ['Bubblegum Sans', 'cursive'],
+				nunito: ['Nunito', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,7 +66,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                kid: {
+                    blue: '#4E97D1',
+                    pink: '#FF5D8F',
+                    yellow: '#FFD166',
+                    green: '#69DB7C',
+                    purple: '#9775FA',
+                    orange: '#FF922B',
+                },
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
