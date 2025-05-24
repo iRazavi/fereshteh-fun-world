@@ -19,7 +19,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-4 rainbow-title">
             شهربازی فرشته
           </h1>
-          <p className="text-xl mb-6 rainbow-text">
+          <p className="text-xl mb-6 text-kid-purple font-semibold">
             مکانی آرام برای کودکان شما
           </p>
           

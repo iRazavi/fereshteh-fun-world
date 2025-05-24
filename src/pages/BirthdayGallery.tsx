@@ -72,7 +72,7 @@ const BirthdayGallery = () => {
                 </h2>
                 <Gift className="h-8 w-8 text-kid-blue animate-bounce" />
               </div>
-              <p className="rainbow-text max-w-2xl mx-auto">
+              <p className="text-kid-purple font-semibold max-w-2xl mx-auto">
                 گوشه‌ای از لحظات شاد و خاطره‌انگیز کودکان در جشن‌های تولد شهربازی فرشته
               </p>
             </div>
@@ -94,7 +94,7 @@ const BirthdayGallery = () => {
                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                                <p className="text-white font-semibold glowing-text">{image.alt}</p>
+                                <p className="text-white font-semibold">{image.alt}</p>
                                 <p className="text-white/80 text-sm">{image.description}</p>
                               </div>
                             </div>

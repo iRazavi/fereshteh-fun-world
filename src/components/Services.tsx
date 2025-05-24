@@ -22,8 +22,8 @@ const ServiceCard = ({
         <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 ${color} group-hover:${gradient} transition-all duration-500`}>
           <Icon className="h-8 w-8 text-white" />
         </div>
-        <h3 className="text-xl font-bold mb-2 rainbow-text">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <h3 className="text-xl font-bold mb-2 text-kid-purple">{title}</h3>
+        <p className="text-gray-700">{description}</p>
       </CardContent>
     </Card>
   );
@@ -80,7 +80,7 @@ const Services = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 rainbow-title">خدمات ما</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-700 max-w-2xl mx-auto">
             ما در شهربازی فرشته طیف متنوعی از خدمات سرگرمی و آموزشی را برای کودکان شما فراهم کرده‌ایم
           </p>
         </div>

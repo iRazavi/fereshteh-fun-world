@@ -37,7 +37,7 @@ const Gallery = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 rainbow-title">گالری تصاویر</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto rainbow-text">
+          <p className="text-kid-purple font-semibold max-w-2xl mx-auto">
             گوشه‌ای از لحظات شاد و خاطره‌انگیز کودکان در شهربازی فرشته
           </p>
         </div>
@@ -57,7 +57,7 @@ const Gallery = () => {
                     className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p className="text-white font-semibold glowing-text">{image.alt}</p>
+                    <p className="text-white font-semibold">{image.alt}</p>
                   </div>
                 </div>
               </DialogTrigger>

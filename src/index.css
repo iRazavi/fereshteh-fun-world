@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -114,17 +113,7 @@
     }
   }
   
-  /* اضافه کردن کلاس‌های جدید برای رنگین کمانی کردن متن‌ها */
-  .rainbow-text {
-    background-image: linear-gradient(to right, #FF9AA2, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow-animation 6s linear infinite;
-    background-size: 400% 100%;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
+  /* کلاس‌های متن رنگین‌کمانی و متن‌های ویژه */
   .rainbow-title {
     background-image: linear-gradient(45deg, #FF61D2, #FE9090, #FBD786, #C6F8FF, #A3BDED);
     -webkit-background-clip: text;
@@ -136,10 +125,24 @@
     text-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
   }
   
-  .glowing-text {
-    color: #FFC0CB;
-    text-shadow: 0 0 5px #FFC0CB, 0 0 10px #FF69B4, 0 0 15px #FF1493;
-    animation: glow 2s ease-in-out infinite alternate;
+  .text-gradient-blue {
+    background-image: linear-gradient(45deg, #4158D0, #C850C0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .text-gradient-pink {
+    color: #FF69B4;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(255, 105, 180, 0.3);
+  }
+  
+  .text-gradient-purple {
+    color: #9370DB;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(147, 112, 219, 0.3);
   }
   
   @keyframes rainbow-animation {
@@ -148,8 +151,10 @@
     100% { background-position: 0% 50%; }
   }
   
-  @keyframes glow {
-    from { text-shadow: 0 0 5px #FFC0CB, 0 0 10px #FF69B4, 0 0 15px #FF1493; }
-    to { text-shadow: 0 0 10px #FFC0CB, 0 0 20px #FF69B4, 0 0 30px #FF1493; }
+  .glowing-text {
+    color: #FF69B4;
+    text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
   }
 }
+
+/* حذف کلاس rainbow-text که خوانایی را کم می‌کرد */
