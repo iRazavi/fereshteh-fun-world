@@ -68,12 +68,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
                 kid: {
-                    blue: '#4E97D1',
-                    pink: '#FF5D8F',
-                    yellow: '#FFD166',
-                    green: '#69DB7C',
-                    purple: '#9775FA',
-                    orange: '#FF922B',
+                    blue: '#A6E1FA', // آبی پاستیلی
+                    pink: '#FFBCDC', // صورتی پاستیلی
+                    yellow: '#FFF3B0', // زرد پاستیلی
+                    green: '#B5EAD7', // سبز پاستیلی
+                    purple: '#E2BEF1', // بنفش پاستیلی
+                    orange: '#FFD8B1', // نارنجی پاستیلی
                 },
 			},
 			borderRadius: {
