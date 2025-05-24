@@ -12,7 +12,7 @@ const Header = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Baby className="h-8 w-8 text-kid-purple" />
-          <h1 className="text-2xl md:text-3xl font-bold text-kid-purple">شهربازی فرشته</h1>
+          <h1 className="text-2xl md:text-3xl font-bold rainbow-title">شهربازی فرشته</h1>
         </div>
         
         <div className="hidden md:flex items-center gap-6">
@@ -29,7 +29,7 @@ const Header = () => {
             </ul>
           </nav>
           
-          <Button variant="default" className="bg-kid-pink hover:bg-kid-pink/90">
+          <Button variant="default" className="bg-gradient-to-r from-kid-pink to-kid-purple hover:from-kid-purple hover:to-kid-pink">
             <PartyPopper className="mr-2" />
             رزرو جشن تولد
           </Button>

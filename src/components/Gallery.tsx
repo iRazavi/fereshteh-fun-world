@@ -33,11 +33,11 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState("");
   
   return (
-    <section id="gallery" className="py-16 bg-blue-50">
+    <section id="gallery" className="py-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-kid-purple">گالری تصاویر</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 rainbow-title">گالری تصاویر</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto rainbow-text">
             گوشه‌ای از لحظات شاد و خاطره‌انگیز کودکان در شهربازی فرشته
           </p>
         </div>
@@ -50,13 +50,14 @@ const Gallery = () => {
                   className="relative overflow-hidden rounded-2xl cursor-pointer group h-64 bg-white p-2 shadow-md hover:shadow-xl transition-all duration-300"
                   onClick={() => setSelectedImage(image.src)}
                 >
+                  <div className="absolute inset-0 bg-gradient-to-br from-kid-pink via-kid-yellow to-kid-blue opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <img 
                     src={image.src} 
                     alt={image.alt} 
                     className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p className="text-white font-semibold">{image.alt}</p>
+                    <p className="text-white font-semibold glowing-text">{image.alt}</p>
                   </div>
                 </div>
               </DialogTrigger>

@@ -113,4 +113,43 @@
       transform: translateY(-10px);
     }
   }
+  
+  /* اضافه کردن کلاس‌های جدید برای رنگین کمانی کردن متن‌ها */
+  .rainbow-text {
+    background-image: linear-gradient(to right, #FF9AA2, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-animation 6s linear infinite;
+    background-size: 400% 100%;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rainbow-title {
+    background-image: linear-gradient(45deg, #FF61D2, #FE9090, #FBD786, #C6F8FF, #A3BDED);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-animation 4s ease infinite;
+    background-size: 400% 100%;
+    font-weight: bold;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .glowing-text {
+    color: #FFC0CB;
+    text-shadow: 0 0 5px #FFC0CB, 0 0 10px #FF69B4, 0 0 15px #FF1493;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes rainbow-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes glow {
+    from { text-shadow: 0 0 5px #FFC0CB, 0 0 10px #FF69B4, 0 0 15px #FF1493; }
+    to { text-shadow: 0 0 10px #FFC0CB, 0 0 20px #FF69B4, 0 0 30px #FF1493; }
+  }
 }

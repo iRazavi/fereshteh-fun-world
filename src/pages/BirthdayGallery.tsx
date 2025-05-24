@@ -61,18 +61,18 @@ const BirthdayGallery = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow">
-        <section className="py-16 bg-blue-50">
+        <section className="py-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <PartyPopper className="h-8 w-8 text-kid-pink animate-bounce" />
-                <h2 className="text-3xl md:text-4xl font-bold text-kid-purple flex items-center justify-center gap-2">
+                <h2 className="text-3xl md:text-4xl font-bold rainbow-title flex items-center justify-center gap-2">
                   <Cake className="h-8 w-8 text-kid-pink" />
                   <span>گالری جشن‌های تولد</span>
                 </h2>
                 <Gift className="h-8 w-8 text-kid-blue animate-bounce" />
               </div>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="rainbow-text max-w-2xl mx-auto">
                 گوشه‌ای از لحظات شاد و خاطره‌انگیز کودکان در جشن‌های تولد شهربازی فرشته
               </p>
             </div>
@@ -86,6 +86,7 @@ const BirthdayGallery = () => {
                         <Card className="overflow-hidden cursor-pointer group hover:ring-2 hover:ring-kid-pink transition-all duration-300">
                           <CardContent className="p-3">
                             <div className="relative h-64 rounded-xl overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-br from-kid-pink via-kid-yellow to-kid-blue opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                               <img 
                                 src={image.src} 
                                 alt={image.alt} 
@@ -93,7 +94,7 @@ const BirthdayGallery = () => {
                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                                <p className="text-white font-semibold">{image.alt}</p>
+                                <p className="text-white font-semibold glowing-text">{image.alt}</p>
                                 <p className="text-white/80 text-sm">{image.description}</p>
                               </div>
                             </div>

@@ -16,10 +16,10 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
         <div className="w-full md:w-1/2 text-right order-2 md:order-1 mt-8 md:mt-0">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-kid-purple">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 rainbow-title">
             شهربازی فرشته
           </h1>
-          <p className="text-xl mb-6 text-gray-700">
+          <p className="text-xl mb-6 rainbow-text">
             مکانی آرام برای کودکان شما
           </p>
           
@@ -43,10 +43,10 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-end">
-            <Button className="bg-kid-pink hover:bg-kid-purple text-white rounded-full px-8 py-6 text-lg">
+            <Button className="bg-gradient-to-r from-kid-pink via-kid-purple to-kid-blue hover:from-kid-blue hover:to-kid-pink text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
               رزرو تولد
             </Button>
-            <Button variant="outline" className="border-kid-blue text-kid-blue hover:bg-kid-blue hover:text-white rounded-full px-8 py-6 text-lg">
+            <Button variant="outline" className="border-kid-blue text-kid-blue hover:bg-kid-blue hover:text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-md hover:shadow-lg">
               درباره ما
             </Button>
           </div>
@@ -54,7 +54,7 @@ const Hero = () => {
         
         <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2">
           <div className="relative w-72 h-72 md:w-[400px] md:h-[400px]">
-            <div className="absolute inset-0 bg-kid-yellow rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-kid-pink via-kid-yellow to-kid-blue rounded-full opacity-20 animate-pulse"></div>
             <img 
               src="/lovable-uploads/fb760065-c240-46c4-9d66-35dcc8537a0c.png" 
               alt="کودکان در حال بازی" 
