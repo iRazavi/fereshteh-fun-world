@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Baby, Gift, PartyPopper, Cake } from 'lucide-react';
+import { Baby, Gift, PartyPopper, Cake, Calendar, Store } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -24,6 +24,14 @@ const Header = () => {
               <li><Link to="/birthday-gallery" className="text-gray-700 hover:text-kid-purple transition-colors flex items-center gap-1">
                 <Cake className="h-4 w-4" />
                 <span>جشن تولدها</span>
+              </Link></li>
+              <li><Link to="/reservation" className="text-gray-700 hover:text-kid-purple transition-colors flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                <span>رزرو</span>
+              </Link></li>
+              <li><Link to="/toy-store" className="text-gray-700 hover:text-kid-purple transition-colors flex items-center gap-1">
+                <Store className="h-4 w-4" />
+                <span>فروشگاه</span>
               </Link></li>
               <li><a href="#contact" className="text-gray-700 hover:text-kid-purple transition-colors">تماس با ما</a></li>
             </ul>
@@ -60,6 +68,14 @@ const Header = () => {
               <li><Link to="/birthday-gallery" className="text-gray-700 block py-1 flex items-center gap-1" onClick={() => setIsMenuOpen(false)}>
                 <Cake className="h-4 w-4" />
                 <span>جشن تولدها</span>
+              </Link></li>
+              <li><Link to="/reservation" className="text-gray-700 block py-1 flex items-center gap-1" onClick={() => setIsMenuOpen(false)}>
+                <Calendar className="h-4 w-4" />
+                <span>رزرو</span>
+              </Link></li>
+              <li><Link to="/toy-store" className="text-gray-700 block py-1 flex items-center gap-1" onClick={() => setIsMenuOpen(false)}>
+                <Store className="h-4 w-4" />
+                <span>فروشگاه</span>
               </Link></li>
               <li><a href="#contact" className="text-gray-700 block py-1" onClick={() => setIsMenuOpen(false)}>تماس با ما</a></li>
               <li className="mt-4">
