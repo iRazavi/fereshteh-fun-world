@@ -9,7 +9,93 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      reservations: {
+        Row: {
+          child_name: string
+          created_at: string
+          email: string | null
+          guest_count: number
+          id: string
+          package_type: string
+          parent_name: string
+          party_date: string
+          party_time: string
+          phone: string
+          special_requests: string | null
+          status: string | null
+          total_price: number | null
+        }
+        Insert: {
+          child_name: string
+          created_at?: string
+          email?: string | null
+          guest_count: number
+          id?: string
+          package_type: string
+          parent_name: string
+          party_date: string
+          party_time: string
+          phone: string
+          special_requests?: string | null
+          status?: string | null
+          total_price?: number | null
+        }
+        Update: {
+          child_name?: string
+          created_at?: string
+          email?: string | null
+          guest_count?: number
+          id?: string
+          package_type?: string
+          parent_name?: string
+          party_date?: string
+          party_time?: string
+          phone?: string
+          special_requests?: string | null
+          status?: string | null
+          total_price?: number | null
+        }
+        Relationships: []
+      }
+      toys: {
+        Row: {
+          age_group: string | null
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          in_stock: number | null
+          name: string
+          price: number
+          updated_at: string
+        }
+        Insert: {
+          age_group?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          in_stock?: number | null
+          name: string
+          price: number
+          updated_at?: string
+        }
+        Update: {
+          age_group?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          in_stock?: number | null
+          name?: string
+          price?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

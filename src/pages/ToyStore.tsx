@@ -1,153 +1,159 @@
-
-import React, { useState } from 'react';
-import { ShoppingCart, Star, Heart, Search } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShoppingCart, Search, Filter, Plus, Minus, Store } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
 
 interface Toy {
-  id: number;
+  id: string;
   name: string;
-  price: number;
-  image: string;
-  category: string;
-  rating: number;
-  inStock: boolean;
   description: string;
+  price: number;
+  image_url: string;
+  category: string;
+  age_group: string;
+  in_stock: number;
+}
+
+interface CartItem extends Toy {
+  quantity: number;
 }
 
 const ToyStore = () => {
+  const [toys, setToys] = useState<Toy[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [cart, setCart] = useState<Toy[]>([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState('');
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const { toast } = useToast();
 
-  React.useEffect(() => {
-    document.documentElement.dir = 'rtl';
+  useEffect(() => {
+    fetchToys();
   }, []);
 
-  const toys: Toy[] = [
-    {
-      id: 1,
-      name: 'ماشین کنترلی',
-      price: 250000,
-      image: '/lovable-uploads/97a59d89-6c0d-4b08-a39b-741e1a39230e.png',
-      category: 'vehicles',
-      rating: 4.5,
-      inStock: true,
-      description: 'ماشین کنترلی زیبا و کیفیت بالا برای کودکان'
-    },
-    {
-      id: 2,
-      name: 'عروسک تدی',
-      price: 180000,
-      image: '/lovable-uploads/50bcd95e-1163-4772-8a43-0ebb0df2466a.png',
-      category: 'dolls',
-      rating: 5,
-      inStock: true,
-      description: 'عروسک نرم و دوست‌داشتنی برای کودکان'
-    },
-    {
-      id: 3,
-      name: 'پازل آموزشی',
-      price: 120000,
-      image: '/lovable-uploads/af4816ad-cff9-4037-aa50-5fad4cef4525.png',
-      category: 'educational',
-      rating: 4.8,
-      inStock: true,
-      description: 'پازل تعلیمی برای تقویت هوش کودک'
-    },
-    {
-      id: 4,
-      name: 'توپ بازی',
-      price: 45000,
-      image: '/lovable-uploads/fb760065-c240-46c4-9d66-35dcc8537a0c.png',
-      category: 'sports',
-      rating: 4.2,
-      inStock: true,
-      description: 'توپ رنگارنگ برای بازی و تفریح'
-    },
-    {
-      id: 5,
-      name: 'بلوک‌های ساختنی',
-      price: 320000,
-      image: '/lovable-uploads/0aa126d7-129e-4b19-a7a4-9ceeede72d7f.png',
-      category: 'building',
-      rating: 4.7,
-      inStock: false,
-      description: 'بلوک‌های رنگی برای ساخت و ساز'
-    },
-    {
-      id: 6,
-      name: 'کتاب داستان',
-      price: 85000,
-      image: '/lovable-uploads/282d71b1-3c40-4153-b8aa-5874e54ae266.png',
-      category: 'books',
-      rating: 4.9,
-      inStock: true,
-      description: 'کتاب داستان‌های جذاب برای کودکان'
-    }
-  ];
+  const fetchToys = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('toys')
+        .select('*')
+        .gt('in_stock', 0)
+        .order('name');
 
-  const categories = [
-    { id: 'all', name: 'همه محصولات' },
-    { id: 'vehicles', name: 'وسائل نقلیه' },
-    { id: 'dolls', name: 'عروسک' },
-    { id: 'educational', name: 'آموزشی' },
-    { id: 'sports', name: 'ورزشی' },
-    { id: 'building', name: 'ساختنی' },
-    { id: 'books', name: 'کتاب' }
-  ];
+      if (error) throw error;
+      setToys(data || []);
+    } catch (error) {
+      console.error('Error fetching toys:', error);
+      toast({
+        title: "خطا",
+        description: "خطا در بارگذاری کالاها",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const categories = [...new Set(toys.map(toy => toy.category))];
+  const ageGroups = [...new Set(toys.map(toy => toy.age_group))];
 
   const filteredToys = toys.filter(toy => {
-    const matchesSearch = toy.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || toy.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesSearch = toy.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         toy.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = !selectedCategory || toy.category === selectedCategory;
+    const matchesAgeGroup = !selectedAgeGroup || toy.age_group === selectedAgeGroup;
+    return matchesSearch && matchesCategory && matchesAgeGroup;
   });
 
   const addToCart = (toy: Toy) => {
-    setCart([...cart, toy]);
-    toast({
-      title: "به سبد خرید اضافه شد!",
-      description: `${toy.name} به سبد خرید شما اضافه شد.`,
-    });
-  };
-
-  const toggleFavorite = (toyId: number) => {
-    if (favorites.includes(toyId)) {
-      setFavorites(favorites.filter(id => id !== toyId));
+    const existingItem = cart.find(item => item.id === toy.id);
+    
+    if (existingItem) {
+      if (existingItem.quantity < toy.in_stock) {
+        setCart(cart.map(item =>
+          item.id === toy.id 
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        ));
+        toast({
+          title: "افزوده شد",
+          description: `${toy.name} به سبد خرید اضافه شد`,
+        });
+      } else {
+        toast({
+          title: "موجودی ناکافی",
+          description: "تعداد درخواستی بیش از موجودی است",
+          variant: "destructive",
+        });
+      }
     } else {
-      setFavorites([...favorites, toyId]);
+      setCart([...cart, { ...toy, quantity: 1 }]);
+      toast({
+        title: "افزوده شد",
+        description: `${toy.name} به سبد خرید اضافه شد`,
+      });
     }
   };
 
+  const removeFromCart = (toyId: string) => {
+    setCart(cart.filter(item => item.id !== toyId));
+  };
+
+  const updateQuantity = (toyId: string, newQuantity: number) => {
+    if (newQuantity === 0) {
+      removeFromCart(toyId);
+      return;
+    }
+    
+    const toy = toys.find(t => t.id === toyId);
+    if (toy && newQuantity <= toy.in_stock) {
+      setCart(cart.map(item =>
+        item.id === toyId 
+          ? { ...item, quantity: newQuantity }
+          : item
+      ));
+    }
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  const getTotalItems = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  };
+
   const formatPrice = (price: number) => {
-    return price.toLocaleString('fa-IR') + ' تومان';
+    return new Intl.NumberFormat('fa-IR').format(price) + ' تومان';
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-kid-pink/20 to-kid-purple/20" dir="rtl">
       <Header />
       
-      <main className="flex-1 py-16 bg-gradient-to-b from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-purple-600">فروشگاه اسباب بازی</h1>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              بهترین اسباب بازی‌ها را برای فرزندان عزیزتان انتخاب کنید
-            </p>
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Store className="h-12 w-12 text-kid-purple" />
+            <h1 className="text-4xl font-bold text-gray-800">فروشگاه اسباب‌بازی</h1>
           </div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            بهترین اسباب‌بازی‌ها برای کودکان عزیز شما
+          </p>
+        </div>
 
-          {/* جستجو و فیلتر */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8 max-w-4xl mx-auto">
-            <div className="flex-1 relative">
-              <Search className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
+        {/* Filters and Search */}
+        <div className="mb-8 space-y-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="جستجوی اسباب بازی..."
+                placeholder="جستجو در اسباب‌بازی‌ها..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pr-10"
@@ -157,117 +163,169 @@ const ToyStore = () => {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-input bg-background rounded-md"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-kid-purple"
             >
+              <option value="">همه دسته‌ها</option>
               {categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
+                <option key={category} value={category}>{category}</option>
               ))}
             </select>
 
-            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-md shadow">
-              <ShoppingCart className="h-5 w-5 text-purple-500" />
-              <span className="text-purple-600 font-semibold">سبد خرید: {cart.length}</span>
-            </div>
-          </div>
+            <select
+              value={selectedAgeGroup}
+              onChange={(e) => setSelectedAgeGroup(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-kid-purple"
+            >
+              <option value="">همه سنین</option>
+              {ageGroups.map(ageGroup => (
+                <option key={ageGroup} value={ageGroup}>{ageGroup}</option>
+              ))}
+            </select>
 
-          {/* محصولات */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredToys.map(toy => (
-              <Card key={toy.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="relative">
-                  <img 
-                    src={toy.image} 
-                    alt={toy.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  
-                  <button
-                    onClick={() => toggleFavorite(toy.id)}
-                    className="absolute top-2 left-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors"
-                  >
-                    <Heart 
-                      className={`h-4 w-4 ${favorites.includes(toy.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}`} 
+            <Button
+              onClick={() => setIsCartOpen(true)}
+              className="bg-kid-purple hover:bg-kid-purple/90 relative"
+            >
+              <ShoppingCart className="ml-2 h-4 w-4" />
+              سبد خرید
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                  {getTotalItems()}
+                </span>
+              )}
+            </Button>
+          </div>
+        </div>
+
+        {/* Products Grid */}
+        {loading ? (
+          <div className="text-center py-12">در حال بارگذاری...</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredToys.map((toy) => (
+              <Card key={toy.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader className="p-4">
+                  {toy.image_url ? (
+                    <img
+                      src={toy.image_url}
+                      alt={toy.name}
+                      className="w-full h-48 object-cover rounded-lg mb-4"
                     />
-                  </button>
-                  
-                  {!toy.inStock && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                      <span className="text-white font-bold bg-red-500 px-3 py-1 rounded">ناموجود</span>
+                  ) : (
+                    <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                      <Store className="h-12 w-12 text-gray-400" />
                     </div>
                   )}
-                </div>
-                
-                <CardContent className="p-4">
-                  <h3 className="font-bold text-lg text-purple-700 mb-2">{toy.name}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{toy.description}</p>
-                  
-                  <div className="flex items-center gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className={`h-4 w-4 ${i < Math.floor(toy.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
-                      />
-                    ))}
-                    <span className="text-sm text-gray-600 mr-2">({toy.rating})</span>
+                  <CardTitle className="text-lg">{toy.name}</CardTitle>
+                  <CardDescription className="text-sm">{toy.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="p-4 pt-0">
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">دسته‌بندی:</span>
+                      <span>{toy.category}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">رده سنی:</span>
+                      <span>{toy.age_group}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">موجودی:</span>
+                      <span className={toy.in_stock > 5 ? 'text-green-600' : 'text-orange-600'}>
+                        {toy.in_stock} عدد
+                      </span>
+                    </div>
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-pink-600">{formatPrice(toy.price)}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg font-bold text-green-600">
+                      {formatPrice(toy.price)}
+                    </span>
                     <Button
                       onClick={() => addToCart(toy)}
-                      disabled={!toy.inStock}
-                      className="bg-gradient-to-r from-pink-400 to-purple-500 hover:from-purple-500 hover:to-pink-400 disabled:opacity-50"
+                      disabled={toy.in_stock === 0}
+                      className="bg-kid-pink hover:bg-kid-pink/90"
                     >
-                      <ShoppingCart className="h-4 w-4 ml-2" />
-                      خرید
+                      <Plus className="ml-1 h-4 w-4" />
+                      افزودن
                     </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
+        )}
 
-          {filteredToys.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">هیچ محصولی یافت نشد!</p>
+        {!loading && filteredToys.length === 0 && (
+          <div className="text-center py-12 text-gray-500">
+            هیچ محصولی یافت نشد
+          </div>
+        )}
+
+        {/* Cart Sidebar */}
+        {isCartOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
+            <div className="bg-white w-96 h-full p-6 overflow-y-auto">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold">سبد خرید</h2>
+                <Button variant="ghost" onClick={() => setIsCartOpen(false)}>×</Button>
+              </div>
+
+              {cart.length === 0 ? (
+                <p className="text-gray-500 text-center">سبد خرید خالی است</p>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((item) => (
+                    <div key={item.id} className="border-b pb-4">
+                      <h3 className="font-semibold">{item.name}</h3>
+                      <p className="text-sm text-gray-600">{formatPrice(item.price)}</p>
+                      
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          >
+                            <Minus className="h-3 w-3" />
+                          </Button>
+                          <span className="px-3 py-1 border rounded">{item.quantity}</span>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            disabled={item.quantity >= item.in_stock}
+                          >
+                            <Plus className="h-3 w-3" />
+                          </Button>
+                        </div>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => removeFromCart(item.id)}
+                        >
+                          حذف
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="pt-4 border-t">
+                    <div className="flex justify-between text-lg font-bold">
+                      <span>مجموع:</span>
+                      <span>{formatPrice(getTotalPrice())}</span>
+                    </div>
+                    
+                    <Button className="w-full mt-4 bg-green-600 hover:bg-green-700">
+                      تکمیل خرید
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-
-          {/* اطلاعات تحویل */}
-          <Card className="max-w-4xl mx-auto mt-12">
-            <CardHeader>
-              <CardTitle className="text-center text-2xl text-purple-600">اطلاعات مهم</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="space-y-2">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                  <ShoppingCart className="h-8 w-8 text-green-600" />
-                </div>
-                <h3 className="font-bold text-purple-700">تحویل رایگان</h3>
-                <p className="text-gray-600">برای خریدهای بالای ۲۰۰ هزار تومان</p>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                  <Star className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="font-bold text-purple-700">کیفیت تضمینی</h3>
-                <p className="text-gray-600">تمام محصولات دارای گارانتی کیفیت</p>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto">
-                  <Heart className="h-8 w-8 text-pink-600" />
-                </div>
-                <h3 className="font-bold text-purple-700">رضایت ۱۰۰٪</h3>
-                <p className="text-gray-600">ضمانت بازگشت وجه تا ۷ روز</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
+          </div>
+        )}
+      </div>
 
       <Footer />
     </div>

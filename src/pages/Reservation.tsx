@@ -1,258 +1,330 @@
 
 import React, { useState } from 'react';
-import { Calendar, Clock, Users, Phone, Mail, User } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Calendar, Clock, Users, Phone, Mail, MessageSquare, PartyPopper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const Reservation = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    childName: '',
+    parentName: '',
     phone: '',
     email: '',
-    date: '',
-    time: '',
-    guests: '',
-    service: ''
+    partyDate: '',
+    partyTime: '',
+    guestCount: '',
+    packageType: '',
+    specialRequests: ''
   });
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  React.useEffect(() => {
-    document.documentElement.dir = 'rtl';
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "رزرو شما ثبت شد!",
-      description: "ما به زودی با شما تماس خواهیم گرفت.",
-    });
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      date: '',
-      time: '',
-      guests: '',
-      service: ''
-    });
-  };
-
-  const services = [
-    { id: 'birthday', name: 'جشن تولد', price: '500,000 تومان' },
-    { id: 'party', name: 'مهمانی کودک', price: '300,000 تومان' },
-    { id: 'education', name: 'کلاس آموزشی', price: '150,000 تومان' },
-    { id: 'gaming', name: 'گیم‌نت', price: '50,000 تومان ساعتی' },
-    { id: 'cafe', name: 'کافه کودک', price: 'بر اساس سفارش' }
+  const packages = [
+    { name: 'پکیج ساده', price: 500000, description: 'تزیینات ساده، کیک و شیرینی' },
+    { name: 'پکیج طلایی', price: 800000, description: 'تزیینات کامل، کیک، شیرینی و بازی‌ها' },
+    { name: 'پکیج VIP', price: 1200000, description: 'تزیینات لوکس، کیک، شیرینی، بازی‌ها و نمایش' }
   ];
 
+  const calculateTotalPrice = () => {
+    const selectedPackage = packages.find(pkg => pkg.name === formData.packageType);
+    const basePrice = selectedPackage?.price || 0;
+    const guestCount = parseInt(formData.guestCount) || 0;
+    const extraGuestPrice = guestCount > 10 ? (guestCount - 10) * 50000 : 0;
+    return basePrice + extraGuestPrice;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const totalPrice = calculateTotalPrice();
+      
+      const { error } = await supabase
+        .from('reservations')
+        .insert({
+          child_name: formData.childName,
+          parent_name: formData.parentName,
+          phone: formData.phone,
+          email: formData.email || null,
+          party_date: formData.partyDate,
+          party_time: formData.partyTime,
+          guest_count: parseInt(formData.guestCount),
+          package_type: formData.packageType,
+          special_requests: formData.specialRequests || null,
+          total_price: totalPrice,
+          status: 'pending'
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "درخواست رزرو ثبت شد",
+        description: "درخواست شما با موفقیت ثبت گردید. به زودی با شما تماس خواهیم گرفت.",
+      });
+
+      // Reset form
+      setFormData({
+        childName: '',
+        parentName: '',
+        phone: '',
+        email: '',
+        partyDate: '',
+        partyTime: '',
+        guestCount: '',
+        packageType: '',
+        specialRequests: ''
+      });
+
+    } catch (error) {
+      console.error('Error submitting reservation:', error);
+      toast({
+        title: "خطا",
+        description: "خطا در ثبت درخواست رزرو. لطفاً دوباره تلاش کنید.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('fa-IR').format(price) + ' تومان';
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-kid-pink/20 to-kid-purple/20" dir="rtl">
       <Header />
       
-      <main className="flex-1 py-16 bg-gradient-to-b from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-purple-600">رزرو آنلاین</h1>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              رزرو خود را به راحتی انجام دهید و از خدمات شهربازی فرشته لذت ببرید
-            </p>
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <PartyPopper className="h-12 w-12 text-kid-purple" />
+            <h1 className="text-4xl font-bold text-gray-800">رزرو جشن تولد</h1>
           </div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            جشن تولد فراموش‌نشدنی برای کودک عزیزتان در شهربازی فرشته رزرو کنید
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* فرم رزرو */}
-            <Card className="shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl text-purple-600 text-center">فرم رزرو</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="name" className="text-purple-600 font-semibold">نام و نام خانوادگی</Label>
-                      <div className="relative">
-                        <User className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          className="pr-10"
-                          placeholder="نام خود را وارد کنید"
-                          required
-                        />
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="phone" className="text-purple-600 font-semibold">شماره تماس</Label>
-                      <div className="relative">
-                        <Phone className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
-                        <Input
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          className="pr-10"
-                          placeholder="09123456789"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
+        <div className="max-w-4xl mx-auto grid gap-8 lg:grid-cols-2">
+          {/* Reservation Form */}
+          <Card>
+            <CardHeader>
+              <CardTitle>فرم رزرو</CardTitle>
+              <CardDescription>لطفاً اطلاعات مورد نیاز را تکمیل کنید</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="email" className="text-purple-600 font-semibold">ایمیل (اختیاری)</Label>
+                    <Label htmlFor="childName">نام کودک</Label>
+                    <Input
+                      id="childName"
+                      value={formData.childName}
+                      onChange={(e) => setFormData({ ...formData, childName: e.target.value })}
+                      placeholder="نام کودک"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="parentName">نام والدین</Label>
+                    <Input
+                      id="parentName"
+                      value={formData.parentName}
+                      onChange={(e) => setFormData({ ...formData, parentName: e.target.value })}
+                      placeholder="نام پدر یا مادر"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="phone">شماره تلفن</Label>
                     <div className="relative">
-                      <Mail className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
+                      <Phone className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
+                        id="phone"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="09123456789"
                         className="pr-10"
-                        placeholder="example@email.com"
+                        required
                       />
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="date" className="text-purple-600 font-semibold">تاریخ</Label>
-                      <div className="relative">
-                        <Calendar className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
-                        <Input
-                          id="date"
-                          name="date"
-                          type="date"
-                          value={formData.date}
-                          onChange={handleInputChange}
-                          className="pr-10"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="time" className="text-purple-600 font-semibold">ساعت</Label>
-                      <div className="relative">
-                        <Clock className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
-                        <select
-                          id="time"
-                          name="time"
-                          value={formData.time}
-                          onChange={handleInputChange}
-                          className="w-full h-10 px-3 pr-10 border border-input bg-background rounded-md"
-                          required
-                        >
-                          <option value="">انتخاب ساعت</option>
-                          <option value="9:00">9:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="18:00">18:00</option>
-                        </select>
-                      </div>
+                  <div>
+                    <Label htmlFor="email">ایمیل (اختیاری)</Label>
+                    <div className="relative">
+                      <Mail className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="example@email.com"
+                        className="pr-10"
+                      />
                     </div>
                   </div>
+                </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="guests" className="text-purple-600 font-semibold">تعداد نفرات</Label>
-                      <div className="relative">
-                        <Users className="absolute right-3 top-3 h-4 w-4 text-purple-500" />
-                        <Input
-                          id="guests"
-                          name="guests"
-                          type="number"
-                          min="1"
-                          max="50"
-                          value={formData.guests}
-                          onChange={handleInputChange}
-                          className="pr-10"
-                          placeholder="تعداد کودکان"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="service" className="text-purple-600 font-semibold">نوع خدمات</Label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="w-full h-10 px-3 border border-input bg-background rounded-md"
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="partyDate">تاریخ مهمانی</Label>
+                    <div className="relative">
+                      <Calendar className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input
+                        id="partyDate"
+                        type="date"
+                        value={formData.partyDate}
+                        onChange={(e) => setFormData({ ...formData, partyDate: e.target.value })}
+                        className="pr-10"
                         required
-                      >
-                        <option value="">انتخاب خدمات</option>
-                        {services.map(service => (
-                          <option key={service.id} value={service.id}>
-                            {service.name} - {service.price}
-                          </option>
-                        ))}
-                      </select>
+                      />
                     </div>
                   </div>
+                  <div>
+                    <Label htmlFor="partyTime">ساعت مهمانی</Label>
+                    <div className="relative">
+                      <Clock className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input
+                        id="partyTime"
+                        type="time"
+                        value={formData.partyTime}
+                        onChange={(e) => setFormData({ ...formData, partyTime: e.target.value })}
+                        className="pr-10"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
 
-                  <Button type="submit" className="w-full bg-gradient-to-r from-pink-400 to-purple-500 hover:from-purple-500 hover:to-pink-400 text-white py-3 text-lg">
-                    ثبت رزرو
-                  </Button>
-                </form>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="guestCount">تعداد مهمان</Label>
+                    <div className="relative">
+                      <Users className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input
+                        id="guestCount"
+                        type="number"
+                        min="1"
+                        value={formData.guestCount}
+                        onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })}
+                        placeholder="تعداد مهمان‌ها"
+                        className="pr-10"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="packageType">نوع پکیج</Label>
+                    <select
+                      id="packageType"
+                      value={formData.packageType}
+                      onChange={(e) => setFormData({ ...formData, packageType: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-kid-purple"
+                      required
+                    >
+                      <option value="">انتخاب پکیج</option>
+                      {packages.map((pkg) => (
+                        <option key={pkg.name} value={pkg.name}>
+                          {pkg.name} - {formatPrice(pkg.price)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="specialRequests">درخواست‌های ویژه (اختیاری)</Label>
+                  <div className="relative">
+                    <MessageSquare className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                    <textarea
+                      id="specialRequests"
+                      value={formData.specialRequests}
+                      onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
+                      placeholder="درخواست‌های خاص شما..."
+                      className="w-full min-h-[100px] px-3 py-2 pr-10 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-kid-purple"
+                    />
+                  </div>
+                </div>
+
+                {formData.packageType && formData.guestCount && (
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <h3 className="font-semibold text-green-800 mb-2">خلاصه رزرو:</h3>
+                    <p className="text-green-700">مبلغ کل: <span className="font-bold">{formatPrice(calculateTotalPrice())}</span></p>
+                    {parseInt(formData.guestCount) > 10 && (
+                      <p className="text-sm text-green-600 mt-1">
+                        * هزینه اضافی برای {parseInt(formData.guestCount) - 10} مهمان اضافی محاسبه شده
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                <Button 
+                  type="submit" 
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-kid-pink to-kid-purple hover:from-kid-purple hover:to-kid-pink text-white py-3 text-lg"
+                >
+                  {loading ? 'در حال ثبت...' : 'ثبت درخواست رزرو'}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
+          {/* Package Information */}
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>پکیج‌های تولد</CardTitle>
+                <CardDescription>پکیج مناسب برای جشن تولد کودکتان انتخاب کنید</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {packages.map((pkg) => (
+                  <div key={pkg.name} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-semibold text-lg">{pkg.name}</h3>
+                      <span className="text-lg font-bold text-green-600">{formatPrice(pkg.price)}</span>
+                    </div>
+                    <p className="text-gray-600 text-sm">{pkg.description}</p>
+                  </div>
+                ))}
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <p className="text-sm text-blue-800">
+                    <strong>توجه:</strong> برای بیش از 10 مهمان، هزینه اضافی 50,000 تومان به ازای هر نفر محاسبه می‌شود.
+                  </p>
+                </div>
               </CardContent>
             </Card>
 
-            {/* لیست قیمت‌ها */}
-            <div className="space-y-6">
-              <Card className="shadow-xl">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-purple-600 text-center">لیست قیمت‌ها</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {services.map(service => (
-                      <div key={service.id} className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
-                        <span className="font-semibold text-purple-700">{service.name}</span>
-                        <span className="text-pink-600 font-bold">{service.price}</span>
-                      </div>
-                    ))}
+            <Card>
+              <CardHeader>
+                <CardTitle>اطلاعات تماس</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-kid-purple" />
+                    <span>021-12345678</span>
                   </div>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-xl">
-                <CardHeader>
-                  <CardTitle className="text-xl text-purple-600 text-center">اطلاعات تماس</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center space-y-3">
-                  <p className="text-gray-700">
-                    <strong>تلفن:</strong> 09917037267 | 07152451323
-                  </p>
-                  <p className="text-gray-700">
-                    <strong>آدرس:</strong> گراش - خیابان بازار - جنب آموزشگاه رانندگی - ساختمان فرشته
-                  </p>
-                  <p className="text-sm text-purple-600">
-                    ساعات کاری: روزهای زوج 9 صبح تا 9 شب
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 text-kid-purple" />
+                    <span>info@fereshte-park.com</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </main>
+      </div>
 
       <Footer />
     </div>
