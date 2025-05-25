@@ -65,14 +65,14 @@ const BirthdayGallery = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <PartyPopper className="h-8 w-8 text-kid-pink animate-bounce" />
-                <h2 className="text-3xl md:text-4xl font-bold rainbow-title flex items-center justify-center gap-2">
-                  <Cake className="h-8 w-8 text-kid-pink" />
+                <PartyPopper className="h-8 w-8 text-pink-500 animate-bounce" />
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-600 flex items-center justify-center gap-2">
+                  <Cake className="h-8 w-8 text-pink-500" />
                   <span>گالری جشن‌های تولد</span>
                 </h2>
-                <Gift className="h-8 w-8 text-kid-blue animate-bounce" />
+                <Gift className="h-8 w-8 text-blue-500 animate-bounce" />
               </div>
-              <p className="text-kid-purple font-semibold max-w-2xl mx-auto">
+              <p className="text-purple-600 font-semibold max-w-2xl mx-auto">
                 گوشه‌ای از لحظات شاد و خاطره‌انگیز کودکان در جشن‌های تولد شهربازی فرشته
               </p>
             </div>

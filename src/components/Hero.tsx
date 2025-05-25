@@ -19,34 +19,34 @@ const Hero = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-4 rainbow-title">
             شهربازی فرشته
           </h1>
-          <p className="text-xl mb-6 text-kid-purple font-semibold">
+          <p className="text-xl mb-6 text-purple-600 font-semibold">
             مکانی آرام برای کودکان شما
           </p>
           
           <div className="space-y-3 mb-8">
             <div className="flex items-center justify-end gap-2">
               <span className="text-gray-700">محیطی شاد و امن برای بازی</span>
-              <CircleCheck className="text-kid-green h-5 w-5" />
+              <CircleCheck className="text-green-500 h-5 w-5" />
             </div>
             <div className="flex items-center justify-end gap-2">
               <span className="text-gray-700">برگزاری جشن تولد</span>
-              <CircleCheck className="text-kid-green h-5 w-5" />
+              <CircleCheck className="text-green-500 h-5 w-5" />
             </div>
             <div className="flex items-center justify-end gap-2">
               <span className="text-gray-700">کلاس‌های آموزشی و تفریحی</span>
-              <CircleCheck className="text-kid-green h-5 w-5" />
+              <CircleCheck className="text-green-500 h-5 w-5" />
             </div>
             <div className="flex items-center justify-end gap-2">
               <span className="text-gray-700">کافه کودک</span>
-              <CircleCheck className="text-kid-green h-5 w-5" />
+              <CircleCheck className="text-green-500 h-5 w-5" />
             </div>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-end">
-            <Button className="bg-gradient-to-r from-kid-pink via-kid-purple to-kid-blue hover:from-kid-blue hover:to-kid-pink text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+            <Button className="bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 hover:from-blue-500 hover:to-pink-400 text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
               رزرو تولد
             </Button>
-            <Button variant="outline" className="border-kid-blue text-kid-blue hover:bg-kid-blue hover:text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-md hover:shadow-lg">
+            <Button variant="outline" className="border-blue-400 text-blue-600 hover:bg-blue-500 hover:text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-md hover:shadow-lg">
               درباره ما
             </Button>
           </div>
