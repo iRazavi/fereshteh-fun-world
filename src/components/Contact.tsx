@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from '@/hooks/use-toast';
@@ -101,31 +100,10 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6 text-kid-purple text-right">اطلاعات تماس</h3>
               <div className="space-y-6 text-right">
-                <div className="bg-blue-50 rounded-3xl p-6 border border-kid-blue/20">
-                  <div className="flex items-start justify-end gap-3 mb-4">
-                    <div>
-                      <h4 className="font-bold text-kid-blue mb-2">آدرس:</h4>
-                      <p className="text-gray-700 mb-3">
-                        استان فارس، شهرستان گراش<br/>
-                        نگین جنوب، دروازه، M47P+CH5, Iran
-                      </p>
-                      <a 
-                        href="https://maps.google.com/?q=M47P+CH5,Iran" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline text-sm"
-                      >
-                        مشاهده در نقشه
-                      </a>
-                    </div>
-                    <MapPin className="text-kid-blue h-6 w-6 flex-shrink-0 mt-1" />
-                  </div>
-                </div>
-
                 <div className="bg-green-50 rounded-3xl p-6 border border-green-200">
                   <div className="flex items-start justify-end gap-3 mb-4">
                     <div>
-                      <h4 className="font-bold text-green-700 mb-2">آدرس محل کسب‌وکار:</h4>
+                      <h4 className="font-bold text-green-700 mb-2">آدرس:</h4>
                       <p className="text-gray-700 mb-3">
                         گراش - خیابان بازار - جنب آموزشگاه رانندگی - ساختمان فرشته
                       </p>
