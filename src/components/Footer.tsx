@@ -24,6 +24,7 @@ const Footer = () => {
         
         <div className="mt-8 pt-6 border-t border-gray-200 text-center text-gray-600 text-sm">
           <p>© {new Date().getFullYear()} - تمامی حقوق برای شهربازی فرشته محفوظ است</p>
+          <p className="mt-1">ساخته شده توسط عرشیا</p>
         </div>
       </div>
     </footer>

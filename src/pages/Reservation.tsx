@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Calendar, Clock, Users, Phone, Mail, MessageSquare, PartyPopper } from 'lucide-react';
+import { Calendar, Clock, Users, Phone, Mail, MessageSquare, PartyPopper, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -307,17 +306,32 @@ const Reservation = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle>اطلاعات تماس</CardTitle>
+                <CardTitle>اطلاعات تماس برای رزرو</CardTitle>
+                <CardDescription>لطفاً جهت رزرو جشن تولد با ما تماس بگیرید</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Phone className="h-5 w-5 text-kid-purple" />
-                    <span>021-12345678</span>
+                    <div>
+                      <p className="font-medium">شماره تماس:</p>
+                      <p className="text-lg font-bold text-kid-purple">09917037267</p>
+                      <p className="text-lg font-bold text-kid-purple">07152451323</p>
+                    </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-kid-purple" />
-                    <span>info@fereshte-park.com</span>
+                    <Instagram className="h-5 w-5 text-pink-500" />
+                    <div>
+                      <p className="font-medium">صفحه اینستاگرام:</p>
+                      <a 
+                        href="https://instagram.com/share_bazi_fereshte" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-pink-500 hover:underline"
+                      >
+                        @share_bazi_fereshte
+                      </a>
+                    </div>
                   </div>
                 </div>
               </CardContent>
