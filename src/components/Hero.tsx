@@ -8,14 +8,14 @@ const Hero = () => {
     <div 
       className="relative pt-16 pb-8 md:pt-20 md:pb-24 overflow-hidden"
       style={{
-        backgroundImage: 'url(/lovable-uploads/a2dca7f5-ec83-4261-877b-b4e620cb878a.png)',
+        backgroundImage: 'url(/lovable-uploads/50bcd95e-1163-4772-8a43-0ebb0df2466a.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}
     >
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/40"></div>
       
       {/* Additional floating elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -26,19 +26,21 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
         <div className="w-full md:w-1/2 text-right order-2 md:order-1 mt-8 md:mt-0">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-2xl" style={{
-            textShadow: '4px 4px 8px rgba(0,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.3)',
-            background: 'linear-gradient(45deg, #FF61D2, #FE9090, #FBD786, #C6F8FF, #A3BDED)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-            fontWeight: 'bold'
-          }}>
+          <h1 
+            className="text-4xl md:text-6xl font-bold mb-4 text-white"
+            style={{
+              textShadow: '4px 4px 8px rgba(0,0,0,1), 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)',
+              fontWeight: 'bold'
+            }}
+          >
             شهربازی فرشته
           </h1>
-          <p className="text-xl mb-6 text-white font-bold drop-shadow-lg" style={{
-            textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
-          }}>
+          <p 
+            className="text-xl mb-6 text-white font-bold"
+            style={{
+              textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
+            }}
+          >
             مکانی آرام برای کودکان شما
           </p>
           
