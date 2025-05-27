@@ -37,10 +37,12 @@ const Header = () => {
             </ul>
           </nav>
           
-          <Button variant="default" className="bg-gradient-to-r from-kid-pink to-kid-purple hover:from-kid-purple hover:to-kid-pink">
-            <PartyPopper className="mr-2" />
-            رزرو جشن تولد
-          </Button>
+          <Link to="/reservation">
+            <Button variant="default" className="bg-gradient-to-r from-kid-pink to-kid-purple hover:from-kid-purple hover:to-kid-pink">
+              <PartyPopper className="mr-2" />
+              رزرو جشن تولد
+            </Button>
+          </Link>
         </div>
         
         <button 
@@ -79,10 +81,12 @@ const Header = () => {
               </Link></li>
               <li><a href="#contact" className="text-gray-700 block py-1" onClick={() => setIsMenuOpen(false)}>تماس با ما</a></li>
               <li className="mt-4">
-                <Button variant="default" className="w-full bg-kid-pink hover:bg-kid-pink/90">
-                  <PartyPopper className="mr-2" />
-                  رزرو جشن تولد
-                </Button>
+                <Link to="/reservation" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="default" className="w-full bg-kid-pink hover:bg-kid-pink/90">
+                    <PartyPopper className="mr-2" />
+                    رزرو جشن تولد
+                  </Button>
+                </Link>
               </li>
             </ul>
           </nav>

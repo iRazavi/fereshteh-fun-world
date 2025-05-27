@@ -2,13 +2,14 @@
 import React from 'react';
 import { Baby, CircleCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
     <div 
       className="relative pt-16 pb-8 md:pt-20 md:pb-24 overflow-hidden"
       style={{
-        backgroundImage: 'url(/lovable-uploads/50bcd95e-1163-4772-8a43-0ebb0df2466a.png)',
+        backgroundImage: 'url(/lovable-uploads/fb760065-c240-46c4-9d66-35dcc8537a0c.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -64,9 +65,11 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-end">
-            <Button className="bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 hover:from-blue-500 hover:to-pink-400 text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
-              رزرو تولد
-            </Button>
+            <Link to="/reservation">
+              <Button className="bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 hover:from-blue-500 hover:to-pink-400 text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                رزرو تولد
+              </Button>
+            </Link>
             <Button variant="outline" className="border-2 border-white bg-white/90 text-purple-600 hover:bg-purple-500 hover:text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm">
               درباره ما
             </Button>
