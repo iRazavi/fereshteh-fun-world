@@ -13,6 +13,11 @@ const ParentReviews = () => {
       name: "آقای رضایی", 
       rating: 5,
       text: "کیفیت خدمات عالی و قیمت‌ها مناسب. بچه‌ها هم خیلی خوش می‌گذرونن و هم چیزهای جدید یاد می‌گیرن."
+    },
+    {
+      name: "آقای محمدی",
+      rating: 5, 
+      text: "از اولین روزی که اومدیم عاشق این مجموعه شدیم. فضای بسیار تمیز و مناسب و کادر حرفه‌ای. حتماً دوباره میایم."
     }
   ];
 
@@ -35,7 +40,7 @@ const ParentReviews = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {reviews.map((review, index) => (
             <div key={index} className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 relative">
               <div className="absolute -top-4 -right-4">
@@ -66,7 +71,7 @@ const ParentReviews = () => {
             <span className="text-yellow-500 text-xl">⭐</span>
             <span className="font-bold text-gray-800">4.9 از 5</span>
             <span className="text-gray-600">|</span>
-            <span className="text-gray-600">بیش از 200 نظر مثبت</span>
+            <span className="text-gray-600">بیش از 300 نظر مثبت</span>
           </div>
         </div>
       </div>
