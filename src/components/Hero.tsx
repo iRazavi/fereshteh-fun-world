@@ -63,11 +63,12 @@ const Hero = () => {
         <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2">
           <div className="relative w-72 h-72 md:w-[400px] md:h-[400px]">
             <div className="absolute inset-0 bg-gradient-to-br from-kid-pink via-kid-yellow to-kid-blue rounded-full opacity-30 animate-pulse"></div>
-            <div className="relative z-10 rounded-3xl h-full w-full shadow-2xl bg-gradient-to-br from-yellow-200 via-pink-200 to-purple-200 flex items-center justify-center">
-              <div className="text-center">
-                <Baby className="h-24 w-24 text-purple-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-purple-600">شهربازی فرشته</h3>
-              </div>
+            <div className="relative z-10 rounded-3xl h-full w-full shadow-2xl overflow-hidden">
+              <img 
+                src="/lovable-uploads/0ca6ef3a-fd8f-44b1-928c-fc826f3c0c99.png" 
+                alt="جشن تولد در شهربازی فرشته" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="absolute -bottom-5 -right-5 bg-white p-3 rounded-2xl shadow-lg floating">
               <Baby className="h-8 w-8 text-kid-purple" />

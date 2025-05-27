@@ -65,15 +65,6 @@ const ParentReviews = () => {
             </div>
           ))}
         </div>
-        
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 shadow-md">
-            <span className="text-yellow-500 text-xl">⭐</span>
-            <span className="font-bold text-gray-800">4.9 از 5</span>
-            <span className="text-gray-600">|</span>
-            <span className="text-gray-600">بیش از 300 نظر مثبت</span>
-          </div>
-        </div>
       </div>
     </section>
   );
