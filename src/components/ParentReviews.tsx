@@ -5,17 +5,17 @@ import { Star, Quote } from 'lucide-react';
 const ParentReviews = () => {
   const reviews = [
     {
-      name: "خانم احمدی",
+      name: "مامان امیرحسین",
       rating: 5,
       text: "بچه‌ام عاشق این جا شده! محیط فوق‌العاده امن و مربیان بسیار مهربان. جشن تولدی که اینجا گرفتیم واقعاً فراموش‌نشدنی بود."
     },
     {
-      name: "آقای رضایی", 
+      name: "مامان آوا", 
       rating: 5,
       text: "کیفیت خدمات عالی و قیمت‌ها مناسب. بچه‌ها هم خیلی خوش می‌گذرونن و هم چیزهای جدید یاد می‌گیرن."
     },
     {
-      name: "آقای محمدی",
+      name: "مامان پریا",
       rating: 5, 
       text: "از اولین روزی که اومدیم عاشق این مجموعه شدیم. فضای بسیار تمیز و مناسب و کادر حرفه‌ای. حتماً دوباره میایم."
     }
@@ -34,7 +34,7 @@ const ParentReviews = () => {
     <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-kid-purple">نظرات والدین</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-kid-purple">نظر بابا و مامان‌ها</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             نظرات والدین عزیز که تجربه خوشی با شهربازی فرشته داشته‌اند
           </p>
