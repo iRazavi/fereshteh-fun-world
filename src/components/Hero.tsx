@@ -54,9 +54,11 @@ const Hero = () => {
                 رزرو تولد
               </Button>
             </Link>
-            <Button variant="outline" className="border-2 border-white bg-white/90 text-purple-600 hover:bg-purple-500 hover:text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm">
-              درباره ما
-            </Button>
+            <a href="#contact">
+              <Button variant="outline" className="border-2 border-white bg-white/90 text-purple-600 hover:bg-purple-500 hover:text-white rounded-full px-8 py-6 text-lg transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm">
+                درباره ما
+              </Button>
+            </a>
           </div>
         </div>
         

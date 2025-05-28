@@ -124,8 +124,26 @@ const Contact = () => {
                 <div className="flex items-center justify-end gap-3">
                   <div>
                     <p className="font-bold text-gray-800 mb-1">شماره تماس:</p>
-                    <p className="text-lg font-bold text-kid-purple">09917037267</p>
-                    <p className="text-lg font-bold text-kid-purple">07152451323</p>
+                    <div className="flex items-center gap-2 justify-end">
+                      <p className="text-lg font-bold text-kid-purple">09917037267</p>
+                      <a 
+                        href="tel:09917037267" 
+                        className="text-green-500 hover:text-green-600 transition-colors"
+                        title="تماس مستقیم"
+                      >
+                        <Phone className="h-5 w-5" />
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-2 justify-end">
+                      <p className="text-lg font-bold text-kid-purple">07152451323</p>
+                      <a 
+                        href="tel:07152451323" 
+                        className="text-green-500 hover:text-green-600 transition-colors"
+                        title="تماس مستقیم"
+                      >
+                        <Phone className="h-5 w-5" />
+                      </a>
+                    </div>
                   </div>
                   <Phone className="text-kid-purple h-6 w-6 flex-shrink-0" />
                 </div>
