@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { CircleCheck, Phone, Instagram, MapPin, Shield, Heart, Star, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -74,9 +75,11 @@ const Contact = () => {
                 <p className="text-gray-700 leading-relaxed mb-4">
                   برای تجربه‌ای شاد، آموزنده و متفاوت، دعوت می‌کنیم همین امروز به شهربازی فرشته بیایید و لحظاتی پر از خنده و شادی را در کنار کودکانتان سپری کنید. منتظر دیدار شما هستیم!
                 </p>
-                <Button className="w-full bg-gradient-to-r from-kid-pink to-kid-purple hover:from-kid-purple hover:to-kid-pink text-white">
-                  رزرو کنید
-                </Button>
+                <Link to="/reservation">
+                  <Button className="w-full bg-gradient-to-r from-kid-pink to-kid-purple hover:from-kid-purple hover:to-kid-pink text-white">
+                    رزرو کنید
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -90,7 +93,7 @@ const Contact = () => {
                   <Shield className="h-8 w-8 text-green-500 mx-auto" />
                 </div>
                 <h4 className="font-bold text-gray-800 mb-2">محیط امن</h4>
-                <p className="text-sm text-gray-600">نظارت 24 ساعته و تجهیزات استاندارد</p>
+                <p className="text-sm text-gray-600">نظارت دقیق و تجهیزات استاندارد</p>
               </div>
               <div className="text-center">
                 <div className="bg-white p-4 rounded-full w-16 h-16 mx-auto mb-3 shadow-md">
