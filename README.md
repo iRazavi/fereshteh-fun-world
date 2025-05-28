@@ -1,151 +1,126 @@
+# Welcome to your Lovable project
 
-Welcome to Lovable Project
-Welcome to the official repository of the Lovable Project!
-This project is dedicated to providing a delightful and engaging online experience.
-You can explore the live site here:
-Lovable Project Website
-Lovable Project on lovable.dev
+## Project info
 
-How can I edit this code?
-There are several ways to edit your application:
+URL=https://lovable.dev/projects/77d3ec56-9edd-4d3e-8fff-6e41d012a7c1
+CREATOR="Arshia (known as Arshi) 🔴"
 
-Use Lovable
-Simply visit the Lovable Project website and start prompting.
-Changes made via Lovable will be committed automatically to this repo.
+echo "Project URL: $URL"
+echo "Created by: $CREATOR"
 
-Use your preferred IDE
-If you want to work locally:
+## How can I edit this code?
 
-Clone this repo with:
-git clone <YOUR_GIT_URL>
+echo "There are several ways of editing your application."
 
-Navigate to the project directory:
-cd <YOUR_PROJECT_NAME>
+echo "Use Lovable:"
+echo "Visit the Lovable Project at $URL and start prompting."
+echo "Changes made via Lovable will be committed automatically to this repo."
 
-Install dependencies:
-npm i
+echo "Use your preferred IDE:"
+echo "Clone this repo and push changes to reflect in Lovable."
+echo "Requires Node.js & npm installed - install with nvm: https://github.com/nvm-sh/nvm#installing-and-updating"
 
-Start the development server with auto-reloading:
-npm run dev
+echo "Steps to work locally:"
 
-Note: You need to have Node.js and npm installed. You can install them using nvm.
+echo "Step 1: Clone the repo"
+echo "git clone <YOUR_GIT_URL>"
 
-Edit files directly in GitHub
+echo "Step 2: Enter project folder"
+echo "cd <YOUR_PROJECT_NAME>"
 
-Navigate to the desired file.
+echo "Step 3: Install dependencies"
+echo "npm i"
 
-Click the "Edit" (pencil) button on the file view.
+echo "Step 4: Start dev server with live reload"
+echo "npm run dev"
 
-Make your changes and commit.
+echo "Edit files directly in GitHub:"
+echo "- Navigate to file(s)"
+echo "- Click Edit (pencil icon)"
+echo "- Make changes and commit"
 
-Use GitHub Codespaces
+echo "Use GitHub Codespaces:"
+echo "- Go to repo main page"
+echo "- Click 'Code' (green button)"
+echo "- Select 'Codespaces' tab"
+echo "- Click 'New codespace' and start editing"
+echo "- Commit and push changes"
 
-Go to the repo main page.
+## Technologies used
 
-Click the green "Code" button.
+echo "This project uses:"
+echo "- Vite"
+echo "- TypeScript"
+echo "- React"
+echo "- shadcn-ui"
+echo "- Tailwind CSS"
 
-Select the "Codespaces" tab and launch a new codespace.
+## How to deploy
 
-Edit and commit changes there.
+echo "Open Lovable at $URL and click Share -> Publish"
 
-What technologies are used?
-This project is built with:
+## Custom domain
 
-Vite
+echo "To connect a custom domain:"
+echo "Go to Project > Settings > Domains and click Connect Domain"
+echo "More info: https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide"
 
-TypeScript
+# ---
 
-React
+# فارسی:
 
-shadcn-ui
+URL_FA=https://lovable.dev/projects/77d3ec56-9edd-4d3e-8fff-6e41d012a7c1
+CREATOR_FA="عرشیا معروف به عرشی 🔴"
 
-Tailwind CSS
+echo "آدرس پروژه: $URL_FA"
+echo "ایجاد شده توسط: $CREATOR_FA"
 
-How can I deploy this project?
-Open Lovable and click on Share -> Publish.
+echo "چگونه کد را ویرایش کنیم؟"
 
-Can I connect a custom domain?
-Yes!
-Go to Project > Settings > Domains and click Connect Domain.
-More info: Setting up a custom domain
+echo "روش اول: استفاده از Lovable"
+echo "به سایت پروژه Lovable به آدرس $URL_FA مراجعه کرده و شروع به وارد کردن دستورها کنید."
+echo "تغییرات به‌صورت خودکار به این مخزن منتقل می‌شوند."
 
-Created by Arshia (known as Arshi) 🔴
+echo "روش دوم: استفاده از IDE دلخواه"
+echo "مخزن را کلون کرده و تغییرات را پوش کنید تا در Lovable نمایش داده شود."
+echo "نیاز به نصب Node.js و npm است. نصب با nvm: https://github.com/nvm-sh/nvm#installing-and-updating"
 
-Feel free to contribute, report issues, or suggest new features!
+echo "مراحل:"
 
-فارسی
-به پروژه لاوِیبِل خوش آمدید
-به مخزن رسمی پروژه لاوِیبِل خوش آمدید!
-این پروژه با هدف ارائه تجربه‌ای جذاب و سرگرم‌کننده به کاربران ساخته شده است.
-می‌توانید سایت زنده پروژه را اینجا مشاهده کنید:
-سایت پروژه لاوِیبِل
-پروژه لاوِیبِل در lovable.dev
+echo "مرحله ۱: کلون کردن"
+echo "git clone <YOUR_GIT_URL>"
 
-چگونه می‌توانم این کد را ویرایش کنم؟
-روش‌های مختلفی برای ویرایش برنامه شما وجود دارد:
+echo "مرحله ۲: ورود به پوشه پروژه"
+echo "cd <YOUR_PROJECT_NAME>"
 
-استفاده از Lovable
-به سادگی به سایت پروژه Lovable مراجعه کنید و شروع به وارد کردن دستورها (prompt) کنید.
-تغییرات ایجاد شده در Lovable به صورت خودکار به این مخزن منتقل می‌شوند.
+echo "مرحله ۳: نصب وابستگی‌ها"
+echo "npm i"
 
-استفاده از IDE مورد علاقه‌تان
-اگر می‌خواهید محلی کار کنید:
+echo "مرحله ۴: اجرای سرور توسعه"
+echo "npm run dev"
 
-مخزن را کلون کنید:
-git clone <YOUR_GIT_URL>
+echo "ویرایش مستقیم در گیت‌هاب:"
+echo "- به فایل‌ها بروید"
+echo "- روی دکمه ویرایش (مداد) کلیک کنید"
+echo "- تغییرات را اعمال و ثبت کنید"
 
-وارد پوشه پروژه شوید:
-cd <YOUR_PROJECT_NAME>
+echo "استفاده از GitHub Codespaces:"
+echo "- به صفحه اصلی مخزن بروید"
+echo "- روی دکمه Code کلیک کنید"
+echo "- تب Codespaces را انتخاب کنید"
+echo "- روی New codespace کلیک و شروع به ویرایش کنید"
+echo "- تغییرات را ثبت و ارسال کنید"
 
-وابستگی‌ها را نصب کنید:
-npm i
+echo "تکنولوژی‌های استفاده شده:"
+echo "- Vite"
+echo "- TypeScript"
+echo "- React"
+echo "- shadcn-ui"
+echo "- Tailwind CSS"
 
-سرور توسعه را اجرا کنید:
-npm run dev
+echo "چگونه پروژه را منتشر کنیم؟"
+echo "وارد Lovable به آدرس $URL_FA شده و روی Share -> Publish کلیک کنید."
 
-توجه: نیاز به نصب Node.js و npm دارید که می‌توانید با nvm نصب کنید.
-
-ویرایش مستقیم در گیت‌هاب
-
-به فایل مورد نظر بروید.
-
-روی دکمه ویرایش (آیکون مداد) کلیک کنید.
-
-تغییرات را اعمال و کامیت کنید.
-
-استفاده از GitHub Codespaces
-
-به صفحه اصلی مخزن بروید.
-
-روی دکمه سبز "Code" کلیک کنید.
-
-تب "Codespaces" را انتخاب و یک Codespace جدید بسازید.
-
-تغییرات را ویرایش و کامیت کنید.
-
-تکنولوژی‌های استفاده شده
-این پروژه با استفاده از:
-
-Vite
-
-TypeScript
-
-React
-
-shadcn-ui
-
-Tailwind CSS
-
-ساخته شده است.
-
-چگونه این پروژه را منتشر کنم؟
-کافیست وارد Lovable شوید و روی Share -> Publish کلیک کنید.
-
-آیا می‌توانم دامنه دلخواه به پروژه وصل کنم؟
-بله!
-به مسیر Project > Settings > Domains بروید و روی Connect Domain کلیک کنید.
-اطلاعات بیشتر: تنظیم دامنه سفارشی
-
-ایجاد شده توسط عرشیا معروف به عرشی 🔴
-
-اگر دوست دارید مشارکت کنید، مشکلات را گزارش دهید یا ویژگی جدید پیشنهاد دهید، خوشحال می‌شویم!
+echo "اتصال دامنه اختصاصی:"
+echo "به بخش Project > Settings > Domains بروید و Connect Domain را بزنید."
+echo "اطلاعات بیشتر: https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide"
