@@ -5,7 +5,7 @@ import { Star, Quote } from 'lucide-react';
 const ParentReviews = () => {
   const reviews = [
     {
-      name: "مامان امیرحسین",
+      name: "بابای امیرحسین",
       rating: 5,
       text: "بچه‌ام عاشق این جا شده! محیط فوق‌العاده امن و مربیان بسیار مهربان. جشن تولدی که اینجا گرفتیم واقعاً فراموش‌نشدنی بود."
     },

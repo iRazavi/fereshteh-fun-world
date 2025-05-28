@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Calendar, Clock, Users, Phone, Mail, MessageSquare, PartyPopper, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -34,7 +35,7 @@ const Reservation = () => {
     const selectedPackage = packages.find(pkg => pkg.name === formData.packageType);
     const basePrice = selectedPackage?.price || 0;
     const guestCount = parseInt(formData.guestCount) || 0;
-    const extraGuestPrice = guestCount > 10 ? (guestCount - 10) * 50000 : 0;
+    const extraGuestPrice = guestCount > 8 ? (guestCount - 8) * 120000 : 0;
     return basePrice + extraGuestPrice;
   };
 
@@ -260,9 +261,9 @@ const Reservation = () => {
                   <div className="bg-green-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-green-800 mb-2">خلاصه رزرو:</h3>
                     <p className="text-green-700">مبلغ کل: <span className="font-bold">{formatPrice(calculateTotalPrice())}</span></p>
-                    {parseInt(formData.guestCount) > 10 && (
+                    {parseInt(formData.guestCount) > 8 && (
                       <p className="text-sm text-green-600 mt-1">
-                        * هزینه اضافی برای {parseInt(formData.guestCount) - 10} مهمان اضافی محاسبه شده
+                        * هزینه اضافی برای {parseInt(formData.guestCount) - 8} مهمان اضافی محاسبه شده
                       </p>
                     )}
                   </div>
@@ -298,7 +299,7 @@ const Reservation = () => {
                 ))}
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-sm text-blue-800">
-                    <strong>توجه:</strong> برای بیش از 10 مهمان، هزینه اضافی 50,000 تومان به ازای هر نفر محاسبه می‌شود.
+                    <strong>توجه:</strong> برای بیش از 8 مهمان، هزینه اضافی 120,000 تومان به ازای هر نفر محاسبه می‌شود.
                   </p>
                 </div>
               </CardContent>

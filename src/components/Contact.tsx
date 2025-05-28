@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from '@/hooks/use-toast';
@@ -150,12 +151,8 @@ const Contact = () => {
               <h4 className="text-xl font-bold mb-4 text-kid-blue text-right">ساعات کار</h4>
               <div className="space-y-2 text-right">
                 <p className="flex justify-between">
-                  <span className="text-gray-700">9:00 - 21:00</span>
-                  <span className="font-medium text-gray-800">شنبه تا چهارشنبه</span>
-                </p>
-                <p className="flex justify-between">
-                  <span className="text-gray-700">9:00 - 22:00</span>
-                  <span className="font-medium text-gray-800">پنجشنبه و جمعه</span>
+                  <span className="text-gray-700">17:00 - 24:00</span>
+                  <span className="font-medium text-gray-800">همه روزه</span>
                 </p>
               </div>
             </div>
